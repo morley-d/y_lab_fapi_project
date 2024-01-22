@@ -1,9 +1,6 @@
 from pydantic_settings import BaseSettings
 
 
-# from pydantic import root_validator
-
-
 class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
@@ -12,10 +9,6 @@ class Settings(BaseSettings):
     DB_NAME: str
     DATABASE_URL: str
 
-    # @root_validator
-    # def get_database_url(cls, v):
-    #     v["DATABASE_URL"] = f"postgresql+asyncpg://{v['DB_USER']}:{v['DB_PASS']}@{v['DB_HOST']}:{v['DB_PORT']}/{v['DB_NAME']}"
-    #     return v
 
     class Config:
         env_file = ".env"

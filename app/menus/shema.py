@@ -8,3 +8,8 @@ class ShemaMenu(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ShemaAddMenu(BaseModel):
+    title: str
+    description: str
