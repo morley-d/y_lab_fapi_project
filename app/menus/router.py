@@ -1,3 +1,4 @@
+import http
 from fastapi import APIRouter, HTTPException
 from sqlalchemy import select
 from app.menus.dao import MenuDAO
@@ -22,10 +23,10 @@ async def get_menu(menu_id) -> ShemaMenu:
         return await MenuDAO.find_one_or_none(id=int(menu_id))
 
 
-@router.post("")
+@router.post("", status_code=http.HTTPStatus.CREATED,)
 async def add_menu(menu_data: ShemaAddMenu):
     existing_menu = await MenuDAO.find_one_or_none(title=menu_data.title)
     if existing_menu:
         raise HTTPException(status_code=500)
     description = menu_data.description
-    await MenuDAO.add(title=menu_data.title, description=description)
+    return await MenuDAO.add(title=menu_data.title, description=description)
